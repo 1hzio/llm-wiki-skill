@@ -1,13 +1,11 @@
 ---
 name: llm-wiki
 description: >
-  Build and maintain a persistent, structured knowledge base (LLM Wiki) using Markdown files.
-  Use this skill when the user wants to: create a knowledge base or wiki, organize project knowledge,
-  ingest documents into structured notes, maintain cross-referenced documentation, audit knowledge consistency,
-  or set up a "second brain" for a codebase/research/team. Also trigger when user says "wiki", "knowledge base",
-  "ingest", "摄入", "知识库", "build wiki", "update wiki", "lint wiki", or wants to turn raw documents
-  into structured, interlinked knowledge pages. This skill handles initialization, ingestion, querying,
-  and maintenance of wikis — not just reading existing docs.
+  Compile knowledge into a persistent Wiki of interlinked Markdown pages — ~55% token savings vs re-reading raw sources.
+  Init, ingest, query, lint, trace, and stats for codebase/research/team wikis.
+  Trigger on: "wiki", "knowledge base", "ingest", "摄入", "知识库", "build wiki", "update wiki", "lint wiki",
+  or requests to create/organize/audit a knowledge base, turn raw documents into structured notes,
+  maintain cross-referenced documentation, or set up a "second brain".
 ---
 
 # LLM Wiki Skill
