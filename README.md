@@ -33,32 +33,32 @@ claude skill install /path/to/llm-wiki-skill
 ## Quick Start
 
 ```
-> /wiki init                          # Initialize a new Wiki
-> /wiki ingest src/                   # Ingest codebase structure
-> /wiki batch-ingest raw/             # Ingest all files in a folder
-> /wiki query "How does auth work?"   # Query with Wiki context
-> /wiki digest "authentication"       # Deep cross-source synthesis
-> /wiki compound                      # Capture experience from solved problem
-> /wiki lint                          # Audit Wiki health
-> /wiki trace "deposit flow"          # Map cross-repo feature
-> /wiki graph                         # Generate knowledge graph
-> /wiki stats                         # Show Wiki metrics
+> /wikic init                          # Initialize a new Wiki
+> /wikic ingest src/                   # Ingest codebase structure
+> /wikic batch-ingest raw/             # Ingest all files in a folder
+> /wikic query "How does auth work?"   # Query with Wiki context
+> /wikic digest "authentication"       # Deep cross-source synthesis
+> /wikic compound                      # Capture experience from solved problem
+> /wikic lint                          # Audit Wiki health
+> /wikic trace "deposit flow"          # Map cross-repo feature
+> /wikic graph                         # Generate knowledge graph
+> /wikic stats                         # Show Wiki metrics
 ```
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `/wiki init [path] [--project\|--research\|--team]` | Initialize Wiki with template |
-| `/wiki ingest <source>` | Add knowledge from source |
-| `/wiki batch-ingest <folder> [--category <cat>]` | Ingest all files in a folder |
-| `/wiki query <question>` | Answer using Wiki knowledge |
-| `/wiki digest <topic>` | Deep cross-source synthesis |
-| `/wiki compound` | Capture experience from solved problem |
-| `/wiki lint` | Audit health, find issues |
-| `/wiki trace <feature>` | Map cross-repo feature files |
-| `/wiki graph` | Generate Mermaid knowledge graph |
-| `/wiki stats` | Show metrics and token estimates |
+| `/wikic init [path] [--project\|--research\|--team]` | Initialize Wiki with template |
+| `/wikic ingest <source>` | Add knowledge from source |
+| `/wikic batch-ingest <folder> [--category <cat>]` | Ingest all files in a folder |
+| `/wikic query <question>` | Answer using Wiki knowledge |
+| `/wikic digest <topic>` | Deep cross-source synthesis |
+| `/wikic compound` | Capture experience from solved problem |
+| `/wikic lint` | Audit health, find issues |
+| `/wikic trace <feature>` | Map cross-repo feature files |
+| `/wikic graph` | Generate Mermaid knowledge graph |
+| `/wikic stats` | Show metrics and token estimates |
 
 ## Wiki Structure
 

@@ -1,5 +1,5 @@
 ---
-name: llm-wiki
+name: wikic
 description: >
   Compile knowledge into a persistent Wiki of interlinked Markdown pages — ~55% token savings vs re-reading raw sources.
   Init, ingest, query, lint, trace, and stats for codebase/research/team wikis.
@@ -40,7 +40,7 @@ LLM:   summarize, cross-reference, file, maintain — all the bookkeeping
 
 ## Operations
 
-### 1. Initialize (`/wiki init`)
+### 1. Initialize (`/wikic init`)
 
 When user wants to create a new Wiki, run the init script:
 
@@ -57,7 +57,7 @@ After init, customize the schema:
 2. Ask the user about their domain, focus areas, and page types
 3. Update the schema accordingly
 
-### 2. Ingest (`/wiki ingest <source>`)
+### 2. Ingest (`/wikic ingest <source>`)
 
 Add new knowledge from a source (file, URL, codebase, conversation).
 
@@ -100,7 +100,7 @@ tags: [relevant, tags]
 - **Why**: design decisions, rationale, trade-offs
 - **What Not**: anti-patterns, pitfalls, past mistakes
 
-### 3. Batch Ingest (`/wiki batch-ingest <folder> [--category <cat>]`)
+### 3. Batch Ingest (`/wikic batch-ingest <folder> [--category <cat>]`)
 
 Ingest all files in a folder. Useful for onboarding an existing document set.
 
@@ -113,7 +113,7 @@ Ingest all files in a folder. Useful for onboarding an existing document set.
 
 Supported categories: `architecture`, `tech-stack`, `flow`, `entity`, `reference`, or auto-detect from content.
 
-### 4. Query (`/wiki query <question>`)
+### 4. Query (`/wikic query <question>`)
 
 Answer questions using Wiki knowledge.
 
@@ -125,7 +125,7 @@ Answer questions using Wiki knowledge.
 
 The key insight: **good answers should be filed back into the Wiki**. A comparison analysis, a discovered connection — these shouldn't vanish into chat history.
 
-### 5. Digest (`/wiki digest <topic>`)
+### 5. Digest (`/wikic digest <topic>`)
 
 Deep cross-source synthesis on a topic. Unlike Query (which answers a specific question), Digest explores a topic across all related sources to find patterns, contradictions, and gaps.
 
@@ -142,7 +142,7 @@ Deep cross-source synthesis on a topic. Unlike Query (which answers a specific q
 
 The output is a persistent page, not a chat response. Digests are the Wiki's highest-value synthesis artifacts.
 
-### 6. Compound (`/wiki compound`)
+### 6. Compound (`/wikic compound`)
 
 Capture experience from a recently solved problem. Trigger after debugging sessions, architecture decisions, or any learning moment worth preserving.
 
@@ -202,7 +202,7 @@ When and where this applies. Conditions and constraints.
 4. Cross-reference with existing pages
 5. Update `index.md` and `log.md`
 
-### 7. Lint (`/wiki lint`)
+### 7. Lint (`/wikic lint`)
 
 Audit Wiki health and fix issues.
 
@@ -223,7 +223,7 @@ This checks for dead links, orphan pages, missing frontmatter, and pages without
 
 Present findings as a report. Fix issues on user confirmation.
 
-### 8. Trace (`/wiki trace <feature>`)
+### 8. Trace (`/wikic trace <feature>`)
 
 For codebase wikis: create a cross-repo trace page that maps all files involved in an end-to-end feature.
 
@@ -254,7 +254,7 @@ tags: [trace, cross-repo]
 ...
 ```
 
-### 9. Graph (`/wiki graph`)
+### 9. Graph (`/wikic graph`)
 
 Generate a knowledge graph showing relationships between Wiki pages.
 
@@ -267,7 +267,7 @@ This scans all `[[wikilinks]]` and generates a Mermaid diagram saved to `wiki/kn
 
 Open in any Mermaid-compatible viewer or Obsidian for interactive exploration.
 
-### 10. Stats (`/wiki stats`)
+### 10. Stats (`/wikic stats`)
 
 Show Wiki health metrics:
 ```bash
