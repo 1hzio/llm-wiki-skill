@@ -100,7 +100,20 @@ tags: [relevant, tags]
 - **Why**: design decisions, rationale, trade-offs
 - **What Not**: anti-patterns, pitfalls, past mistakes
 
-### 3. Query (`/wiki query <question>`)
+### 3. Batch Ingest (`/wiki batch-ingest <folder> [--category <cat>]`)
+
+Ingest all files in a folder. Useful for onboarding an existing document set.
+
+**Workflow:**
+1. Scan the folder and list all ingestible files (Markdown, text, PDF, etc.)
+2. Present the file list with detected categories for user confirmation
+3. Process files sequentially, applying the Ingest workflow to each
+4. Pause every 5 files — show progress and ask whether to continue
+5. After completion, update `index.md` and append a single batch entry to `log.md`
+
+Supported categories: `architecture`, `tech-stack`, `flow`, `entity`, `reference`, or auto-detect from content.
+
+### 4. Query (`/wiki query <question>`)
 
 Answer questions using Wiki knowledge.
 
@@ -112,7 +125,84 @@ Answer questions using Wiki knowledge.
 
 The key insight: **good answers should be filed back into the Wiki**. A comparison analysis, a discovered connection — these shouldn't vanish into chat history.
 
-### 4. Lint (`/wiki lint`)
+### 5. Digest (`/wiki digest <topic>`)
+
+Deep cross-source synthesis on a topic. Unlike Query (which answers a specific question), Digest explores a topic across all related sources to find patterns, contradictions, and gaps.
+
+**Workflow:**
+1. Read `wiki/index.md` to identify all pages touching the topic
+2. Read those pages plus any relevant `raw/` sources
+3. Synthesize a comprehensive analysis:
+   - **Patterns**: recurring themes across sources
+   - **Contradictions**: where sources disagree (with source attribution)
+   - **Gaps**: what's missing or under-documented
+   - **Evolution**: how understanding of this topic changed over time
+4. Save the result as a new `wiki/digest-<topic>.md` page
+5. Update `index.md` and `log.md`
+
+The output is a persistent page, not a chat response. Digests are the Wiki's highest-value synthesis artifacts.
+
+### 6. Compound (`/wiki compound`)
+
+Capture experience from a recently solved problem. Trigger after debugging sessions, architecture decisions, or any learning moment worth preserving.
+
+**Two tracks:**
+
+**Bug Track** — for solved bugs and incidents:
+```markdown
+---
+title: "Solution: Brief Description"
+type: solution
+tags: [solution, bug]
+created: YYYY-MM-DD
+---
+
+## Problem
+What went wrong, symptoms observed.
+
+## Investigation
+Steps taken to diagnose. Dead ends included.
+
+## Root Cause
+The actual underlying issue.
+
+## Fix
+What was changed and why.
+
+## Prevention
+How to avoid this class of problem in the future.
+```
+
+**Knowledge Track** — for decisions, discoveries, or learned patterns:
+```markdown
+---
+title: "Knowledge: Topic"
+type: solution
+tags: [solution, knowledge]
+created: YYYY-MM-DD
+---
+
+## Background
+Context and motivation.
+
+## Insight
+The key learning or decision.
+
+## Applicability
+When and where this applies. Conditions and constraints.
+
+## Related
+- [[relevant-pages]] — how this connects to existing knowledge
+```
+
+**Workflow:**
+1. Ask the user: bug fix or knowledge capture?
+2. Gather details through conversation
+3. Create the solution page in `wiki/`
+4. Cross-reference with existing pages
+5. Update `index.md` and `log.md`
+
+### 7. Lint (`/wiki lint`)
 
 Audit Wiki health and fix issues.
 
@@ -133,7 +223,7 @@ This checks for dead links, orphan pages, missing frontmatter, and pages without
 
 Present findings as a report. Fix issues on user confirmation.
 
-### 5. Trace (`/wiki trace <feature>`)
+### 8. Trace (`/wiki trace <feature>`)
 
 For codebase wikis: create a cross-repo trace page that maps all files involved in an end-to-end feature.
 
@@ -164,7 +254,20 @@ tags: [trace, cross-repo]
 ...
 ```
 
-### 6. Stats (`/wiki stats`)
+### 9. Graph (`/wiki graph`)
+
+Generate a knowledge graph showing relationships between Wiki pages.
+
+**Run the graph script:**
+```bash
+bash <skill-path>/scripts/wiki-graph.sh [wiki-path]
+```
+
+This scans all `[[wikilinks]]` and generates a Mermaid diagram saved to `wiki/knowledge-graph.md`. Pages become nodes, cross-references become edges. Helps visualize knowledge clusters and isolated pages.
+
+Open in any Mermaid-compatible viewer or Obsidian for interactive exploration.
+
+### 10. Stats (`/wiki stats`)
 
 Show Wiki health metrics:
 ```bash
@@ -184,6 +287,8 @@ Reports: file count, total lines, estimated tokens, cross-reference count, dead 
 | **reference** | Config, environment, deployment | `deployment-guide.md` |
 | **trace** | Cross-component feature mapping | `trace-auth-flow.md` |
 | **exploration** | Analysis, comparison, investigation | `framework-comparison.md` |
+| **solution** | Bug fixes, decisions, learned patterns | `solution-memory-leak.md` |
+| **digest** | Deep cross-source synthesis | `digest-auth-patterns.md` |
 
 ## Best Practices
 
@@ -200,6 +305,8 @@ Reports: file count, total lines, estimated tokens, cross-reference count, dead 
 **Verify paths before recommending.** For codebase wikis, always Glob/Grep to confirm file paths exist before adding them to Wiki pages.
 
 **Token budget awareness.** For Sonnet (200K context), load index + 3-5 pages selectively. For Opus (1M context), full Wiki loading is fine up to ~100K tokens.
+
+**Obsidian compatible.** The Wiki uses standard Markdown with `[[wikilinks]]` and YAML frontmatter — it works out of the box as an Obsidian vault. Use Graph View to visualize connections, Dataview for dynamic queries.
 
 ## When NOT to Use This Skill
 

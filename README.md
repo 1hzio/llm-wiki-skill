@@ -18,6 +18,9 @@ Real-world impact: **~55% token reduction** per coding task when the Wiki covers
 ## Install
 
 ```bash
+# From skills.sh (recommended)
+npx skills add https://github.com/1hzio/llm-wiki-skill --skill llm-wiki
+
 # Claude Code CLI
 claude skill install /path/to/llm-wiki-skill
 
@@ -32,10 +35,13 @@ claude skill install /path/to/llm-wiki-skill
 ```
 > /wiki init                          # Initialize a new Wiki
 > /wiki ingest src/                   # Ingest codebase structure
-> /wiki ingest raw/architecture.md    # Ingest a document
+> /wiki batch-ingest raw/             # Ingest all files in a folder
 > /wiki query "How does auth work?"   # Query with Wiki context
+> /wiki digest "authentication"       # Deep cross-source synthesis
+> /wiki compound                      # Capture experience from solved problem
 > /wiki lint                          # Audit Wiki health
 > /wiki trace "deposit flow"          # Map cross-repo feature
+> /wiki graph                         # Generate knowledge graph
 > /wiki stats                         # Show Wiki metrics
 ```
 
@@ -45,9 +51,13 @@ claude skill install /path/to/llm-wiki-skill
 |---------|-------------|
 | `/wiki init [path] [--project\|--research\|--team]` | Initialize Wiki with template |
 | `/wiki ingest <source>` | Add knowledge from source |
+| `/wiki batch-ingest <folder> [--category <cat>]` | Ingest all files in a folder |
 | `/wiki query <question>` | Answer using Wiki knowledge |
+| `/wiki digest <topic>` | Deep cross-source synthesis |
+| `/wiki compound` | Capture experience from solved problem |
 | `/wiki lint` | Audit health, find issues |
 | `/wiki trace <feature>` | Map cross-repo feature files |
+| `/wiki graph` | Generate Mermaid knowledge graph |
 | `/wiki stats` | Show metrics and token estimates |
 
 ## Wiki Structure
@@ -92,6 +102,10 @@ Three Wiki templates for different use cases:
 | 100 pages | ~100K | 50% | 10% |
 
 For Sonnet, load selectively (index + 3-5 pages). For Opus, full loading works up to ~100 pages.
+
+## Obsidian Compatible
+
+The Wiki uses standard Markdown with `[[wikilinks]]` and YAML frontmatter — it works out of the box as an [Obsidian](https://obsidian.md) vault. Use Graph View to visualize connections, Dataview for dynamic queries.
 
 ## Credits
 

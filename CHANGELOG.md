@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 — 2026-04-10
+
+New operations and ecosystem improvements.
+
+- Add `batch-ingest` — bulk folder ingestion with progress checkpoints
+- Add `digest` — deep cross-source synthesis producing persistent topic pages
+- Add `compound` — experience capture (bug track + knowledge track)
+- Add `graph` — Mermaid knowledge graph generation via `wiki-graph.sh`
+- Add `solution` and `digest` page types
+- Declare Obsidian vault compatibility
+- Support `npx skills add` installation
+
 ## 0.1.0 — 2026-04-10
 
 Initial release.
