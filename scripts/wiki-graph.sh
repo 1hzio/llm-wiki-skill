@@ -18,6 +18,17 @@ for f in "$WIKI_PATH"/*.md; do
   pages+=("$base")
 done
 
+page_exists() {
+  local candidate="$1"
+  local page
+  for page in "${pages[@]}"; do
+    if [ "$page" = "$candidate" ]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
 if [ ${#pages[@]} -eq 0 ]; then
   echo "No wiki pages found in $WIKI_PATH"
   exit 1
@@ -53,7 +64,11 @@ fi
       | sed 's/\[\[//;s/\]\]//' \
       | sort -u \
       | while read -r target; do
-          tgt_id="${target//-/_}"
+          canonical_target="${target%%|*}"
+          canonical_target="${canonical_target%%#*}"
+          [ -z "$canonical_target" ] && continue
+          page_exists "$canonical_target" || continue
+          tgt_id="${canonical_target//-/_}"
           echo "  ${src_id} --> ${tgt_id}"
         done
   done

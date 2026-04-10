@@ -274,7 +274,7 @@ Show Wiki health metrics:
 bash <skill-path>/scripts/wiki-stats.sh [wiki-path]
 ```
 
-Reports: file count, total lines, estimated tokens, cross-reference count, dead links, pages missing Where/Why/What-Not sections.
+Reports: file count, total lines, estimated tokens, cross-reference count, context-usage estimates, and largest pages. Use `/wikic lint` for dead links, orphan detection, and enrichment coverage checks.
 
 ## Page Types
 

@@ -23,7 +23,7 @@ cat > "$WIKI_PATH/index.md" << 'EOF'
 <!-- Format: - [[page-name]] — one-line description -->
 
 ## Getting Started
-- This Wiki is empty. Run `/wiki ingest` to add your first knowledge.
+- This Wiki is empty. Run `/wikic ingest` to add your first knowledge.
 EOF
 
 # Create log.md
@@ -188,4 +188,4 @@ echo ""
 echo "Next steps:"
 echo "  1. Customize CLAUDE.md for your specific domain"
 echo "  2. Add raw materials to a raw/ directory (optional)"
-echo "  3. Run: /wiki ingest <source> to start building knowledge"
+echo "  3. Run: /wikic ingest <source> to start building knowledge"
