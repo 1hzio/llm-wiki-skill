@@ -1,7 +1,7 @@
 ---
 name: github-workflow-engineering
 description: >
-  Create, refactor, and troubleshoot GitHub Actions workflows for CI/CD and deployment.
+  Create, review, repair, refactor, and troubleshoot GitHub Actions workflows for CI/CD and deployment.
   Use when working on .github/workflows/*.yml, GitHub Actions pipelines, build/test matrices,
   release artifacts, or deploy failures such as SSH exit code 255, flaky startup checks,
   missing caches, over-broad permissions, or unclear workflow structure.
@@ -20,6 +20,8 @@ This skill is intentionally narrow on deployment methods and deep on diagnostics
 Use this skill when the user asks to:
 
 - create or redesign workflows in `.github/workflows/`
+- review or audit existing GitHub Actions workflows
+- repair broken or low-quality workflows without redesigning everything
 - add CI for a repository or monorepo
 - split jobs for parallel build/test/deploy
 - add cache, matrix, artifacts, concurrency, or minimal permissions
@@ -41,7 +43,17 @@ Before proposing YAML, inspect the repo and classify:
 
 Read [references/create-patterns.md](references/create-patterns.md) and use the closest recipe. If the repo is polyglot, compose the workflow from capability blocks instead of forcing a single-language template.
 
-### 2. Create the workflow baseline
+### 2. Decide whether this is create, review, or repair
+
+Use these modes explicitly:
+
+- **Create**: when the repository lacks the needed workflow or the user wants a new CI/CD structure
+- **Review**: when the user asks for audit, code review, problems, risks, or optimization ideas
+- **Repair**: when the workflow exists and the user wants targeted fixes without a full redesign
+
+For review and repair work, read [references/review-repair.md](references/review-repair.md) before editing.
+
+### 3. Create the workflow baseline
 
 For every new or rewritten workflow, default to this baseline unless the repo clearly requires otherwise:
 
@@ -56,7 +68,31 @@ For every new or rewritten workflow, default to this baseline unless the repo cl
 
 Use [references/create-patterns.md](references/create-patterns.md) for the composition rules and build/test recipes.
 
-### 3. Choose a supported deployment style
+### 4. Review existing workflows systematically
+
+When the user asks for a workflow review:
+
+1. inspect all files in `.github/workflows/`
+2. classify each workflow by purpose: CI, release, deploy, maintenance, automation
+3. identify missing gates, incorrect triggers, excessive serialization, unsafe secrets use, weak diagnostics, and stale version assumptions
+4. report findings first, ordered by severity
+5. include file references and concrete repair direction
+
+Do not lead with summaries. Findings are the primary output.
+
+### 5. Repair with the smallest defensible change
+
+When repairing a workflow:
+
+- preserve the repository's current structure if it is fundamentally sound
+- prefer minimal edits that restore correctness, observability, or maintainability
+- split jobs only when the current serialization materially hurts runtime or clarity
+- improve deploy visibility before adding more deployment logic
+- keep fixes local and explain the reason in comments only if the shell logic is otherwise hard to follow
+
+Use [references/review-repair.md](references/review-repair.md) for common failure patterns and repair rules.
+
+### 6. Choose a supported deployment style
 
 This skill is strongest for these deployment styles:
 
@@ -66,7 +102,7 @@ This skill is strongest for these deployment styles:
 
 Use [references/deploy-recipes.md](references/deploy-recipes.md) and pick the smallest pattern that fits the target system. Do not mix multiple deploy styles in one workflow unless the repository already does so.
 
-### 4. Make deployment observable
+### 7. Make deployment observable
 
 Deployment workflows must fail with useful signals.
 
@@ -82,7 +118,7 @@ For SSH deploys, never hide network errors behind `|| true`, and never put dange
 
 Use [references/deploy-diagnostics.md](references/deploy-diagnostics.md) whenever a deploy step fails or when you are designing a deploy workflow from scratch.
 
-### 5. Keep the structure reviewable
+### 8. Keep the structure reviewable
 
 When editing workflows:
 
@@ -97,5 +133,6 @@ If the user asks for a review, findings come first. Focus on broken triggers, mi
 ## References
 
 - [references/create-patterns.md](references/create-patterns.md): repo detection, workflow composition, build/test recipes, artifact strategy
+- [references/review-repair.md](references/review-repair.md): review format, severity ordering, common repair patterns
 - [references/deploy-recipes.md](references/deploy-recipes.md): strong deployment templates for SSH/scp/rsync, container image publish, and Kubernetes
 - [references/deploy-diagnostics.md](references/deploy-diagnostics.md): failure classification and diagnosis patterns for deploy workflows
