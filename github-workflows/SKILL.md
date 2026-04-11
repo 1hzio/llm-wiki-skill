@@ -1,5 +1,5 @@
 ---
-name: github-workflow-engineering
+name: github-workflows
 description: >
   Create, review, repair, refactor, and troubleshoot GitHub Actions workflows for CI/CD and deployment.
   Use when working on .github/workflows/*.yml, GitHub Actions pipelines, build/test matrices,

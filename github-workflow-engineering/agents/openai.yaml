@@ -1,4 +1,0 @@
-interface:
-  display_name: "GitHub Workflow Engineering"
-  short_description: "Create and debug GitHub Actions workflows"
-  default_prompt: "Use $github-workflow-engineering to design or troubleshoot GitHub Actions workflows for this repository."

@@ -6,7 +6,7 @@ A curated collection of best-practice AI agent skills for Claude Code and other 
 
 | Skill | Description | Install |
 |-------|-------------|---------|
-| **[github-workflow-engineering](github-workflow-engineering/)** | Create, review, repair, and debug GitHub Actions workflows with strong deploy diagnostics | `npx skills add 1hzio/agent-skills --skill github-workflow-engineering` |
+| **[github-workflows](github-workflows/)** | Create, review, repair, and debug GitHub Actions workflows with strong deploy diagnostics | `npx skills add 1hzio/agent-skills --skill github-workflows` |
 | **[wikic](wikic/)** | Compile knowledge into a persistent Wiki of interlinked Markdown pages | `npx skills add 1hzio/agent-skills --skill wikic` |
 
 ## Install
@@ -17,7 +17,7 @@ npx skills add 1hzio/agent-skills
 
 # Install a specific skill
 npx skills add 1hzio/agent-skills --skill wikic
-npx skills add 1hzio/agent-skills --skill github-workflow-engineering
+npx skills add 1hzio/agent-skills --skill github-workflows
 
 # Or use Claude Code CLI
 claude skill install /path/to/agent-skills/wikic
